@@ -10,19 +10,19 @@
 <body>
 
     <?php
-
     include 'connect.php';
 
 
+    echo "dit komt er binnen" .  $_GET['project'];
+
     try {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $conn->prepare("SELECT id, project_name, descr_short FROM projecten");
+        $stmt = $conn->prepare("SELECT id, project_name, descr_short FROM projecten WHERE id = ". $_GET['project']);
         $stmt->execute();
 
         // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         foreach ($stmt->fetchAll() as $k => $v) {
-            echo "<a href='detail.php?project=" . $v['id'] . "'>view detials</a>";
             echo $v['id'] . ": ";
             echo $v['project_name'];
             echo " - " . $v['descr_short'];
@@ -32,8 +32,10 @@
         echo "Error: " . $e->getMessage();
     }
     $conn = null;
-    ?>
+    
 
+
+    ?>
 </body>
 
 </html>
