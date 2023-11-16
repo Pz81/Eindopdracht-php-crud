@@ -10,7 +10,7 @@
 <body>
 
     <?php
-    include 'connect.php';
+    include_once'connect.php';
 
 
     echo "dit komt er binnen" .  $_GET['project'];
